@@ -15,17 +15,18 @@ class HomeController extends GetxController {
   HomeController(this.homeRepository);
 
   Rx<CardModel> cardModel = CardModel().obs;
+  RxList<CardModel> listaRandom = <CardModel>[].obs;
   final TextEditingController cardName = TextEditingController();
 
   Future<void> buscarCard() async {
     cardModel.value = await homeRepository.searchCard(cardName.value.text);
-    // data.value = cardModel.urlImage.toString();
   }
 
   Future<void> randomCards() async {
-    cardModel.value = await homeRepository.randomCards();
-
-    // homeRepository.randomCards();
-    // return cardModel.value.urlImage.toString();
+    // cardModel.value = await homeRepository.randomCards();
+    for (int i = 0; i < 5; i++) {
+      listaRandom.add(await homeRepository.randomCards());
+    }
+    print(listaRandom);
   }
 }

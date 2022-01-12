@@ -17,8 +17,6 @@ class HomeRepository {
   Future<CardModel> randomCards() async {
     final Map<String, dynamic> jsonResponse =
         await webService.getRequest(Const.urlRandomCard);
-
-    // print(jsonResponse['name']);
     return CardModel.fromJsonRandom(jsonResponse);
   }
 }
