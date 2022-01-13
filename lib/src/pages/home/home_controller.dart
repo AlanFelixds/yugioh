@@ -8,25 +8,15 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
-    randomCards();
+    cardDay();
     super.onInit();
   }
 
   HomeController(this.homeRepository);
 
   Rx<CardModel> cardModel = CardModel().obs;
-  RxList<CardModel> listaRandom = <CardModel>[].obs;
-  final TextEditingController cardName = TextEditingController();
 
-  Future<void> buscarCard() async {
-    cardModel.value = await homeRepository.searchCard(cardName.value.text);
-  }
-
-  Future<void> randomCards() async {
-    // cardModel.value = await homeRepository.randomCards();
-    for (int i = 0; i < 5; i++) {
-      listaRandom.add(await homeRepository.randomCards());
-    }
-    print(listaRandom);
+  Future<void> cardDay() async {
+    cardModel.value = await homeRepository.cardDay();
   }
 }

@@ -30,16 +30,10 @@ class CardModel {
 
   factory CardModel.fromJson(Map<String, dynamic> json) {
     return CardModel(
-      nome: json['data'][0]['name'] == null
-          ? null
-          : json['data'][0]['name'] as String,
-      atk:
-          json['data'][0]['atk'] == null ? null : json['data'][0]['atk'] as int,
-      def:
-          json['data'][0]['def'] == null ? null : json['data'][0]['def'] as int,
-      urlImage: json['data'][0]['card_images'][0]['image_url'] == null
-          ? null
-          : json['data'][0]['card_images'][0]['image_url'] as String,
+      nome: json['data'][0]['name'] == null ? null : json['data'][0]['name'] as String,
+      atk: json['data'][0]['atk'] == null ? null : json['data'][0]['atk'] as int,
+      def: json['data'][0]['def'] == null ? null : json['data'][0]['def'] as int,
+      urlImage: json['data'][0]['card_images'][0]['image_url'] == null ? null : json['data'][0]['card_images'][0]['image_url'] as String,
     );
   }
 
@@ -48,9 +42,7 @@ class CardModel {
       nome: json['name'] == null ? null : json['name'] as String,
       atk: json['atk'] == null ? null : json['atk'] as int,
       def: json['def'] == null ? null : json['def'] as int,
-      urlImage: json['card_images'][0]['image_url'] == null
-          ? null
-          : json['card_images'][0]['image_url_small'] as String,
+      urlImage: json['card_images'][0]['image_url'] == null ? null : json['card_images'][0]['image_url_small'] as String,
     );
   }
 
