@@ -13,7 +13,7 @@ class _CardProgressIndicatorState extends State<CardProgressIndicator> with Sing
 
   bool isFront = true;
   double pi = 3.1415;
-  double verticalDrag = 180;
+  double angle = 0;
 
   @override
   void initState() {
@@ -25,26 +25,40 @@ class _CardProgressIndicatorState extends State<CardProgressIndicator> with Sing
   Widget build(BuildContext context) {
     Image imgBack = Image.asset('assets/images/back3.jpg', width: 30, height: 45);
     Image imgBack2 = Image.asset('assets/images/back1.png', width: 30, height: 45);
-    Matrix4 transform = Matrix4.identity()
-      ..setEntry(3, 2, 0.001)
-      ..rotateY(animation.value);
 
-    return AnimatedBuilder(
-        animation: controller,
-        builder: (context, child) {
+    return GestureDetector(
+      onTap: flip,
+      child: TweenAnimationBuilder(
+        tween: Tween<double>(begin: 0, end: angle),
+        duration: const Duration(milliseconds: 200),
+        builder: (context, double value, child) {
+          if (value >= (pi / 2)) {
+            isFront = false;
+          } else {
+            isFront = true;
+          }
+
           return Transform(
             alignment: Alignment.center,
-            transform: transform,
+            transform: Matrix4.identity()
+              ..setEntry(3, 2, 0.001)
+              ..rotateY(value),
             child: isFront
                 ? imgBack
                 : Transform(
                     alignment: Alignment.center,
-                    transform: Matrix4.identity()
-                      ..setEntry(3, 2, 0.001)
-                      ..rotateY(verticalDrag / 180 * pi),
+                    transform: Matrix4.identity()..rotateY(pi),
                     child: imgBack2,
                   ),
           );
-        });
+        },
+      ),
+    );
+  }
+
+  void flip() {
+    setState(() {
+      angle = (angle + pi) % (2 * pi);
+    });
   }
 }

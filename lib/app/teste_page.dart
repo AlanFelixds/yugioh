@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yugioh/app/core/widgets/card-progress-indicator/card_progress_indicator.dart';
+import 'package:yugioh/app/core/widgets/loader/loader.dart';
 
 class TestePage extends StatelessWidget {
   const TestePage({Key? key}) : super(key: key);
@@ -16,7 +17,8 @@ class TestePage extends StatelessWidget {
             ElevatedButton(
               onPressed: () {},
               child: const Text("flip"),
-            )
+            ),
+            const Loader(),
           ],
         ),
       ),
