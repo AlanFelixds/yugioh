@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:yugioh/app/core/widgets/button/custom_elevated_button.dart';
 import 'package:yugioh/app/core/widgets/card-progress-indicator/card_progress_indicator.dart';
+import 'package:yugioh/app/core/widgets/loader/card_loader.dart';
 import 'package:yugioh/app/core/widgets/text-field/custom_text_field.dart';
 import 'package:yugioh/app/modulos/login/controller/login_controller.dart';
+import 'package:yugioh/app/modulos/login/state/login_state.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -52,12 +54,22 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                 },
               ),
               const SizedBox(height: 20),
+              // ValueListenableBuilder(valueListenable: controller, builder: builder)
               AnimatedBuilder(
-                animation: controller,
-                builder: (context, child) {
-                  return const CardProgressIndicator();
-                },
-              ),
+                  animation: controller,
+                  builder: (context, child) {
+                    if (controller.state == LoginStatus.carregando) {
+                      return const LoaderCard();
+                    }
+                    if (controller.state == LoginStatus.completo) {
+                      return Container(width: 10, height: 10, color: Colors.blue);
+                    }
+                    if (controller.state == LoginStatus.erro) {
+                      return Container(width: 10, height: 10, color: Colors.red);
+                    }
+
+                    return Container(width: 10, height: 10, color: Colors.green);
+                  }),
             ],
           ),
         ),

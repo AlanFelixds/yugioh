@@ -7,7 +7,7 @@ class LoginController extends LoginState {
   Future<void> logar({required String usuario, required String senha}) async {
     state = LoginStatus.carregando;
     notifyListeners();
-    await Future.delayed(const Duration(seconds: 5), () async {});
+    await Future.delayed(const Duration(seconds: 5), () {});
     try {
       if (usuario == 'depp' && senha == 'depp') {
         state = LoginStatus.completo;

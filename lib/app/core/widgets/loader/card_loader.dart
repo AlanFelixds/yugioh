@@ -15,12 +15,10 @@ class _LoaderCardState extends State<LoaderCard> with SingleTickerProviderStateM
   @override
   void initState() {
     super.initState();
-    controller = AnimationController(vsync: this, duration: const Duration(seconds: 2))
+    controller = AnimationController(vsync: this, duration: const Duration(seconds: 1))
       ..forward()
       ..repeat();
     animationRotation = Tween(begin: 0.0, end: 3.0).animate(CurvedAnimation(parent: controller, curve: Curves.linear));
-
-    // repeatOnce();
   }
 
   @override
@@ -29,23 +27,31 @@ class _LoaderCardState extends State<LoaderCard> with SingleTickerProviderStateM
     super.dispose();
   }
 
-  void repeatOnce() async {
-    await controller.forward();
-  }
-
   @override
   Widget build(BuildContext context) {
+    // return Center(
+    //   child: RotationTransition(
+    //     turns: animationRotation,
+    //     child: Transform(
+    //       alignment: Alignment.center,
+    //       transform: Matrix4.identity()
+    //         ..setEntry(3, 2, 0.001)
+    //         ..rotateY(animationRotation.value),
+    //       child: const CardLoader(),
+    //     ),
+    //   ),
+    // );
     return Center(
-      child: RotationTransition(
-        turns: animationRotation,
-        child: Transform(
-          alignment: Alignment.center,
-          transform: Matrix4.identity()
-            ..setEntry(3, 2, 0.001)
-            ..rotateY(animationRotation.value),
-          child: const CardLoader(),
-        ),
-      ),
+      child: AnimatedBuilder(
+          animation: animationRotation,
+          builder: (context, child) {
+            return Transform(
+                alignment: Alignment.center,
+                transform: Matrix4.identity()
+                  ..setEntry(3, 2, 0.001)
+                  ..rotateY(animationRotation.value),
+                child: const CardLoader());
+          }),
     );
     // return Center(
     //   child: TweenAnimationBuilder(
