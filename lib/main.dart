@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:yugioh/src/utils/app_routes.dart';
+import 'package:yugioh/app/main_widget.dart';
 
 void main() {
-  runApp(GetMaterialApp(
-    debugShowCheckedModeBanner: false,
-    initialRoute: "/home",
-    getPages: Routes.pages,
-  ));
+  runApp(
+    const MainWidget(),
+  );
 }
