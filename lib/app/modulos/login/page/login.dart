@@ -3,7 +3,6 @@ import 'package:yugioh/app/core/widgets/button/custom_elevated_button.dart';
 import 'package:yugioh/app/core/widgets/card-progress-indicator/card_progress_indicator.dart';
 import 'package:yugioh/app/core/widgets/text-field/custom_text_field.dart';
 import 'package:yugioh/app/modulos/login/controller/login_controller.dart';
-import 'package:yugioh/app/modulos/login/state/login_state.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -16,15 +15,6 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
   late final AnimationController aniController;
   bool isBack = true;
   double angle = 0;
-
-  void _flip() {
-    // setState(() {
-    //   angle = (angle + 3.14) % (2 * 3.14);
-    // });
-    setState(() {
-      isBack = !isBack;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {

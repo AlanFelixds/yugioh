@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:yugioh/app/core/widgets/card-progress-indicator/card_progress_indicator.dart';
+import 'package:yugioh/app/core/widgets/loader/card_loader.dart';
 import 'package:yugioh/app/core/widgets/loader/loader.dart';
 
-class TestePage extends StatelessWidget {
+class TestePage extends StatefulWidget {
   const TestePage({Key? key}) : super(key: key);
 
+  @override
+  State<TestePage> createState() => _TestePageState();
+}
+
+class _TestePageState extends State<TestePage> {
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,10 +18,15 @@ class TestePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const CardProgressIndicator(),
+            // const CardProgressIndicator(),
             const SizedBox(height: 20),
+            isLoading == true ? const LoaderCard() : const SizedBox(),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  isLoading = !isLoading;
+                });
+              },
               child: const Text("flip"),
             ),
             const Loader(),

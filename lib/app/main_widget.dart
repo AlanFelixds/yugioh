@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:yugioh/app/modulos/login/page/login.dart';
 import 'package:yugioh/app/teste_page.dart';
 
 class MainWidget extends StatelessWidget {
