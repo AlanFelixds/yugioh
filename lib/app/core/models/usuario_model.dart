@@ -1,11 +1,16 @@
 import 'dart:convert';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+UsuarioModel? usuarioIn;
+
 class UsuarioModel {
   String? email;
   String? nome;
   String? permissao;
   String? token;
+
+  // static UsuarioModel _instance = UsuarioModel._();
+  // static UsuarioModel get instance => _instance;
 
   UsuarioModel({
     this.email,
