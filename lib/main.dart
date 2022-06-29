@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:yugioh/app/main_module.dart';
 import 'package:yugioh/app/main_widget.dart';
 
 void main() {
   runApp(
-    const MainWidget(),
+    ModularApp(module: MainModule(), child: const MainWidget()),
   );
 }

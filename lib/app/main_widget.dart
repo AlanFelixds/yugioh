@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:provider/provider.dart';
 import 'package:yugioh/app/core/services/cliente_http.dart';
-import 'package:yugioh/app/modulos/home/home_page.dart';
-import 'package:yugioh/app/modulos/login/controller/login_controller.dart';
-import 'package:yugioh/app/modulos/login/page/login.dart';
-import 'package:yugioh/app/modulos/login/repository/login_repository.dart';
-// import 'package:yugioh/app/teste_page.dart';
+import 'package:yugioh/app/modulos/modulo-comum/login/controller/login_controller.dart';
+import 'package:yugioh/app/modulos/modulo-comum/login/repository/login_repository.dart';
 
 class MainWidget extends StatelessWidget {
   const MainWidget({Key? key}) : super(key: key);
@@ -15,16 +13,13 @@ class MainWidget extends StatelessWidget {
     return MultiProvider(
       providers: [
         Provider(create: ((_) => ClienteHTTP())),
-        Provider(create: ((context) => LoginRepository(context.read<ClienteHTTP>()))),
-        ChangeNotifierProvider(create: (context) => LoginController(context.read<LoginRepository>())),
+        Provider(create: ((context) => LoginRepository(ReadContext(context).read<ClienteHTTP>()))),
+        ChangeNotifierProvider(create: (context) => LoginController(ReadContext(context).read<LoginRepository>())),
       ],
-      child: MaterialApp(
+      child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
-        initialRoute: "/",
-        routes: {
-          '/': (context) => const Login(),
-          '/home': (context) => const HomePage(),
-        },
+        routeInformationParser: Modular.routeInformationParser,
+        routerDelegate: Modular.routerDelegate,
       ),
     );
   }

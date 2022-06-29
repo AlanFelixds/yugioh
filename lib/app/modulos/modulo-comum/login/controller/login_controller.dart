@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:yugioh/app/core/models/auth_model.dart';
 import 'package:yugioh/app/core/models/usuario_model.dart';
-import 'package:yugioh/app/modulos/login/repository/login_repository.dart';
-import 'package:yugioh/app/modulos/login/state/login_state.dart';
+import 'package:yugioh/app/modulos/modulo-comum/login/repository/login_repository.dart';
+import 'package:yugioh/app/modulos/modulo-comum/login/state/login_state.dart';
 
 class LoginController extends LoginState {
   final LoginRepository _loginRepository;
@@ -10,11 +10,10 @@ class LoginController extends LoginState {
   LoginController(this._loginRepository) : super(state: LoginStatus.inicial);
 
   Future<void> logar({required String usuario, required String senha}) async {
-    state = LoginStatus.carregando;
-    notifyListeners();
-    await Future.delayed(const Duration(seconds: 5), () {});
+    // await Future.delayed(const Duration(seconds: 5), () {});
     try {
-      state = LoginStatus.completo;
+      state = LoginStatus.carregando;
+      notifyListeners();
       final authModel = AuthModel();
       authModel.email = usuario;
       authModel.senha = senha;

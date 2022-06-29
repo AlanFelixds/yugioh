@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:yugioh/app/core/widgets/loader/loader.dart';
 
 class CustomElevatedButton extends StatelessWidget {
   final double? largura;
   final double? altura;
   final String label;
   final VoidCallback onPressed;
+  final Widget loader;
   const CustomElevatedButton({
     Key? key,
     this.largura,
     this.altura,
     required this.label,
     required this.onPressed,
+    required this.loader,
   }) : super(key: key);
 
   @override
@@ -32,7 +35,7 @@ class CustomElevatedButton extends StatelessWidget {
             // const Icon(Icons.cached_rounded),
             ClipRRect(
               borderRadius: BorderRadius.circular(5),
-              child: Image.asset('assets/images/back3.jpg', width: 30, height: 45),
+              child: loader,
             ),
           ],
         ),
